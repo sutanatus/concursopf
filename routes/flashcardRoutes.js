@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { getFlashcardsByDeck, createFlashcard, updateFlashcard, deleteFlashcard } = require('../controllers/flashcardController.js');
+const { verifyToken, isAdmin } = require('../middleware/authMiddleware');
+router.use(verifyToken, isAdmin);
+router.get('/by-deck/:deckId', getFlashcardsByDeck);
+router.post('/by-deck/:deckId', createFlashcard);
+router.put('/:cardId', updateFlashcard);
+router.delete('/:cardId', deleteFlashcard);
+module.exports = router;
